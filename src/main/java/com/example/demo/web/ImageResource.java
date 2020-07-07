@@ -14,7 +14,7 @@ import com.example.demo.image.ImageLoader;
 @RestController
 public class ImageResource {
 
-    private final Logger logger = Logger.getLogger("ImageResourceLogger");
+    private final Logger logger = Logger.getLogger("ImageResource");
     private final ImageLoader imageLoader;
 
     public ImageResource(ImageLoader imageLoader) {
