@@ -3,6 +3,7 @@ package com.example.demo.web;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.cache.CacheManager;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,11 @@ public class ImageResource {
 
     private final Logger logger = Logger.getLogger("ImageResourceLogger");
     private final ImageLoader imageLoader;
+    private final CacheManager cacheManager;
 
-    public ImageResource(ImageLoader imageLoader) {
+    public ImageResource(ImageLoader imageLoader, CacheManager cacheManager) {
         this.imageLoader = imageLoader;
+        this.cacheManager = cacheManager;
     }
 
     @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_PNG_VALUE)
