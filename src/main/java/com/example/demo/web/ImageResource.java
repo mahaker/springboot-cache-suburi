@@ -3,6 +3,7 @@ package com.example.demo.web;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +21,13 @@ public class ImageResource {
         this.imageLoader = imageLoader;
     }
 
-    @GetMapping("/image/{imageId}")
-    public ResponseEntity<String> getImage(
+    @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> getImage(
         @PathVariable String imageId
     ) {
         logger.log(Level.INFO, "imageId={0}", imageId);
 
-        final byte[] image = imageLoader.load("/var/tmp/cess", imageId);
-        return ResponseEntity.ok("Hello world.");
+        var image = imageLoader.load("/var/tmp/cess", imageId);
+        return ResponseEntity.ok(image);
     }
 }
